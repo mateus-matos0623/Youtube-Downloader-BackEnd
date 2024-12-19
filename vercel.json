@@ -5,16 +5,14 @@
       "use": "@vercel/python"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app/main.py"
-    }
-  ],
   "rewrites": [
     {
-      "source": "/download/(.*)",
+      "source": "/download/?video=:video*",
       "destination": "http://127.0.0.1:8000/download/?video=:video*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/app/main.py"
     }
   ]
 }
