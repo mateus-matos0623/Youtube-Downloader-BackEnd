@@ -5,14 +5,10 @@
       "use": "@vercel/python"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/download/(.*)",
-      "destination": "https://you-audio-backend.vercel.app/download/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/app/main.py"
+      "src": "/(.*)",
+      "dest": "app/main.py"
     }
   ]
 }
