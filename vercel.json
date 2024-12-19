@@ -7,8 +7,8 @@
   ],
   "rewrites": [
     {
-      "source": "/download/?video=:video*",
-      "destination": "https://you-audio-backend.vercel.app/download/?video=:video*"
+      "source": "/download/(.*)",
+      "destination": "https://you-audio-backend.vercel.app/download/$1"
     },
     {
       "source": "/(.*)",
