@@ -4,8 +4,9 @@ from app.services.download_service import download_audio, clean_downloads
 
 router = APIRouter()
 
-@router.get('/download/')
+@router.get('/')
 async def download_audio_endpoint(video: str, background_tasks: BackgroundTasks):
+    print('requisição recebida')
     relative_path = await download_audio(video)
 
     if not relative_path:
