@@ -1,0 +1,43 @@
+# Ambiente Virtual
+venv/
+.env
+
+# Pastas de Build
+build/
+dist/
+*.egg-info/
+
+# Pastas de Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configurações do Editor
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de Log
+*.log
+
+# Arquivos de Banco de Dados
+*.sqlite3
+
+# Pastas de Downloads
+downloads/
+
+# Arquivos Temporários do Sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de Teste
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Arquivos de Lint
+.pylint.d/
