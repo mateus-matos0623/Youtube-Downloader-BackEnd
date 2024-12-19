@@ -23,9 +23,6 @@ __pycache__/
 # Arquivos de Banco de Dados
 *.sqlite3
 
-# Pastas de Downloads
-downloads/
-
 # Arquivos Temporários do Sistema
 .DS_Store
 Thumbs.db
