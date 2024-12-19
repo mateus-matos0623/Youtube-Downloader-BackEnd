@@ -5,14 +5,15 @@ from app.routes.download import router as download_router
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware, 
-    allow_origins=["*"], 
-    allow_methods=["*"],
+    allow_origins=["https://you-audio.vercel.app"],
+    allow_credentials=True, 
+    allow_methods=["GET"],
     allow_headers=["*"],
     expose_headers=["Content-Disposition"]
 )
 
+app.include_router(download_router, prefix='/download')
+
 @app.get('/')
 def home():
     return {"message": "home"}
-
-app.include_router(download_router, prefix="/download")
