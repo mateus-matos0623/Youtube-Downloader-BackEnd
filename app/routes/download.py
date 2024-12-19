@@ -6,7 +6,6 @@ router = APIRouter()
 
 @router.get('/')
 async def download_audio_endpoint(video: str, background_tasks: BackgroundTasks):
-    print('requisição recebida')
     relative_path = await download_audio(video)
 
     if not relative_path:
