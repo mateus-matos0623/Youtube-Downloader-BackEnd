@@ -1,4 +1,4 @@
-from os import listdir, unlink
+from os import listdir, unlink, makedirs
 from yt_dlp import YoutubeDL, DownloadError
 from os.path import exists, join, isfile, islink
 from app.utils.filename_sanitizer import sanitize_filename
@@ -38,8 +38,9 @@ async def download_audio(video: str) -> str | None:
             file_path = join('downloads', f'{sanitized_title}.m4a')
 
             if not exists(file_path):
-                print(f"Arquivo não encontrado: {file_path}")
-                return None
+                downloads_path = 'downloads' 
+                makedirs(downloads_path)
+                file_path = join('downloads', f'{sanitized_title}.m4a')
             
             return file_path
 
