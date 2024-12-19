@@ -41,3 +41,4 @@ coverage.xml
 
 # Arquivos de Lint
 .pylint.d/
+.vercel
