@@ -1,6 +1,8 @@
-from os.path import exists, join
+from os import listdir, unlink
 from yt_dlp import YoutubeDL, DownloadError
+from os.path import exists, join, isfile, islink
 from app.utils.filename_sanitizer import sanitize_filename
+
 
 async def download_audio(video: str) -> str | None:
     try:
@@ -8,9 +10,6 @@ async def download_audio(video: str) -> str | None:
             info = ydl.extract_info(video, download=False)
             title = str(info.get('title', 'Sem título'))
             sanitized_title = sanitize_filename(title)
-
-            print(f"Título original: {title}") 
-            print(f"Título sanitizado: {sanitized_title}")
 
             ydl_opts = {
                 'format': 'bestaudio[ext=m4a]',
@@ -37,7 +36,6 @@ async def download_audio(video: str) -> str | None:
                 ydl.download([video])
 
             file_path = join('downloads', f'{sanitized_title}.m4a')
-            print(f'Caminho: ', file_path)
 
             if not exists(file_path):
                 print(f"Arquivo não encontrado: {file_path}")
@@ -51,3 +49,18 @@ async def download_audio(video: str) -> str | None:
     except Exception as e:
         print('Erro: ', str(e))
         return None
+
+
+async def clean_downloads():
+     download_folder = 'downloads'
+
+     for filename in listdir(download_folder):
+        file_path = join(download_folder, filename)
+
+        try: 
+
+            if isfile(file_path) or islink(file_path):
+                unlink(file_path)
+
+        except Exception as e: 
+            print(f'Erro ao tentar remover {filename}. Motivo: {str(e)}')
