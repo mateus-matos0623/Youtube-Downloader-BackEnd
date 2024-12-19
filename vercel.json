@@ -1,14 +1,20 @@
 {
-    "builds":[
-        {
-            "src": "app/main.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "app/main.py"
-        }
-    ]
+  "builds": [
+    {
+      "src": "app/main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app/main.py"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/download/(.*)",
+      "destination": "http://127.0.0.1:8000/download/?video=:video*"
+    }
+  ]
 }
