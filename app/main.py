@@ -12,7 +12,7 @@ app.add_middleware(
     expose_headers=["Content-Disposition"]
 )
 
-app.include_router(download_router, prefix='/download')
+app.include_router(download_router)
 
 @app.get('/')
 def home():
