@@ -13,7 +13,7 @@ async def download_audio(video: str) -> str:
 
             ydl_opts = {
                 'format': 'bestaudio[ext=m4a]',
-                'outtmpl': f'downloads/{sanitized_title}.%(ext)s',
+                'outtmpl': join('downloads', f'{sanitized_title}.%(ext)s'),
                 'writethumbnail': True,
                 'noplaylist': True,
                 'postprocessors': [
