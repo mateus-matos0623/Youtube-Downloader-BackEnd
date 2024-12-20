@@ -4,7 +4,7 @@ from os.path import exists, join, isfile, islink
 from app.utils.filename_sanitizer import sanitize_filename
 
 
-async def download_audio(video: str) -> str | None:
+async def download_audio(video: str) -> str:
     try:
         with YoutubeDL() as ydl:
             info = ydl.extract_info(video, download=False)
