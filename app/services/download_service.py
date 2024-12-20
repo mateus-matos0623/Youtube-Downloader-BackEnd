@@ -6,13 +6,19 @@ from app.utils.filename_sanitizer import sanitize_filename
 
 async def download_audio(video: str) -> str:
     try:
+
+        if not exists('cookies.txt'):
+            raise FileNotFoundError("Arquivo cookies.txt não encontrado.")
+
         downloads_path = '/tmp/downloads'
 
         if not exists(downloads_path):
-            makedirs(downloads_path)
+            makedirs(downloads_path, exist_ok=True)
 
         with YoutubeDL() as ydl:
             info = ydl.extract_info(video, download=False)
+            filename = ydl.prepare_filename(info)
+            print('Filename: ', filename)
             title = str(info.get('title', 'Sem título'))
             sanitized_title = sanitize_filename(title)
 
@@ -42,6 +48,9 @@ async def download_audio(video: str) -> str:
             
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([video])
+
+            if filename:
+                return filename
 
             file_path = join(downloads_path, f'{sanitized_title}.m4a')
 
