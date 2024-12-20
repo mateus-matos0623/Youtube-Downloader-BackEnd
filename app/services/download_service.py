@@ -6,6 +6,11 @@ from app.utils.filename_sanitizer import sanitize_filename
 
 async def download_audio(video: str) -> str:
     try:
+        downloads_path = '/tmp/downloads'
+
+        if not exists(downloads_path):
+            makedirs(downloads_path)
+
         with YoutubeDL() as ydl:
             info = ydl.extract_info(video, download=False)
             title = str(info.get('title', 'Sem título'))
@@ -13,7 +18,7 @@ async def download_audio(video: str) -> str:
 
             ydl_opts = {
                 'format': 'bestaudio[ext=m4a]',
-                'outtmpl': join('downloads', f'{sanitized_title}.%(ext)s'),
+                'outtmpl': join(downloads_path, f'{sanitized_title}.%(ext)s'),
                 'writethumbnail': True,
                 'noplaylist': True,
                 'postprocessors': [
@@ -35,14 +40,9 @@ async def download_audio(video: str) -> str:
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([video])
 
-            file_path = join('downloads', f'{sanitized_title}.m4a')
+            file_path = join(downloads_path, f'{sanitized_title}.m4a')
 
-            if not exists(file_path):
-                downloads_path = 'downloads' 
-                makedirs(downloads_path)
-                file_path = join('downloads', f'{sanitized_title}.m4a')
-            
-            return file_path
+            return file_path if exists(file_path) else None
 
     except DownloadError as e:
         print(f"Error downloading {video}: {str(e)}")
