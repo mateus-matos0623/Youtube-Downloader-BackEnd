@@ -36,6 +36,8 @@ async def download_audio(video: str) -> str:
                 ],
                 'merge_output_format': 'm4a',
                 'cookiefile': 'cookies.txt',
+                'verbose': True,
+                'cookiesfrombrowser': ('chrome',)
             }
             
             with YoutubeDL(ydl_opts) as ydl:
